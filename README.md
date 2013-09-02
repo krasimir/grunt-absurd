@@ -35,30 +35,31 @@ grunt.initConfig({
 
 ### Usage Examples
 
-  module.exports = function(grunt) {
+```js
+module.exports = function(grunt) {
 
-    grunt.initConfig({
-      absurd: {
-        task: {
-          src: __dirname + "/css/absurd/index.js",
-          dest: 'css/styles.css'
-        }
-      },
-      watch: {
-        css: {
-          files: ['css/absurd/**/*.js'],
-          tasks: ['absurd']
-        }
+  grunt.initConfig({
+    absurd: {
+      task: {
+        src: __dirname + "/css/absurd/index.js",
+        dest: 'css/styles.css'
       }
-    });
+    },
+    watch: {
+      css: {
+        files: ['css/absurd/**/*.js'],
+        tasks: ['absurd']
+      }
+    }
+  });
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-absurd');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-absurd');
 
-    // grunt.registerTask('default', ['concat', 'less']);
-    grunt.registerTask('default', ['absurd', 'watch']);
+  // grunt.registerTask('default', ['concat', 'less']);
+  grunt.registerTask('default', ['absurd', 'watch']);
 
-  }
-  
+}
+```
 
 In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS. 
