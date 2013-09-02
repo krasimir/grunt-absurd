@@ -59,5 +59,6 @@ grunt.initConfig({
     grunt.registerTask('default', ['absurd', 'watch']);
 
   }
+  
 
 In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS. 
