@@ -25,65 +25,39 @@ In your project's Gruntfile, add a section named `absurd` to the data object pas
 ```js
 grunt.initConfig({
   absurd: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    task: {
+      src: 'path to your .js file',
+      dest: 'path to your .css file'
+    }
   },
 })
 ```
-
-### Options
-
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+  module.exports = function(grunt) {
 
-```js
-grunt.initConfig({
-  absurd: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+    grunt.initConfig({
+      absurd: {
+        task: {
+          src: __dirname + "/css/absurd/index.js",
+          dest: 'css/styles.css'
+        }
+      },
+      watch: {
+        css: {
+          files: ['css/absurd/**/*.js'],
+          tasks: ['absurd']
+        }
+      }
+    });
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-absurd');
 
-```js
-grunt.initConfig({
-  absurd: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+    // grunt.registerTask('default', ['concat', 'less']);
+    grunt.registerTask('default', ['absurd', 'watch']);
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+  }
 
-## Release History
-_(Nothing yet)_
+In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS. 
