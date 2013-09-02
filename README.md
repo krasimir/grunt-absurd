@@ -1,6 +1,6 @@
 # grunt-absurd
 
-> Grunt plugin for AbsurdJS
+> Grunt plugin for AbsurdJS ([https://github.com/krasimir/absurd](https://github.com/krasimir/absurd))
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
