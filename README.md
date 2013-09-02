@@ -33,7 +33,7 @@ grunt.initConfig({
 })
 ```
 
-### Usage Examples
+### Usage example
 
 ```js
 module.exports = function(grunt) {
