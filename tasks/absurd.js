@@ -24,14 +24,18 @@ module.exports = function(grunt) {
             return;
         }
 
-        Absurd(this.data.src).compile(function(err, css) {
+        var api = Absurd();
+        var options = this.data.options || {};
+        if(options.morph && options.morph === "html") {
+            api.morph("html");
+        }
+        api.import(this.data.src).compile(function(err, css) {
             if(err) {
                 grunt.log.error("Absurd:" + err);
             } else {
                 grunt.file.write(self.data.dest, css, {});
             }
-        });
-
+        }, options);
 
     });
 };

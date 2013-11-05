@@ -27,7 +27,11 @@ grunt.initConfig({
   absurd: {
     task: {
       src: 'path to your .js file',
-      dest: 'path to your .css file'
+      dest: 'path to your .css file',
+      options: {
+        minify: true,
+        morph: "html"
+      }
     }
   },
 })
@@ -40,10 +44,20 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     absurd: {
-      task: {
-        src: __dirname + "/css/absurd/index.js",
-        dest: 'css/styles.css'
-      }
+      css: {
+        src: __dirname + "/tests/absurd/index.js",
+        dest: __dirname + '/tests/css/styles.css',
+        options: {
+          minify: true
+        }
+      },
+      html: {
+        src: __dirname + "/tests/absurd/html.index.js",
+        dest: __dirname + '/tests/html/code.html',
+        options: {
+          morph: "html"
+        }
+      } 
     },
     watch: {
       css: {
@@ -62,4 +76,4 @@ module.exports = function(grunt) {
 }
 ```
 
-In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS. 
+In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS and HTML.

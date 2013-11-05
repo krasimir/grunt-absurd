@@ -1,7 +1,7 @@
 module.exports = function(api) {
 	api.add({
 		header: {
-			width: '960px',
+			width: '962px',
 			margin: '0 auto'
 		}
 	})

@@ -4,10 +4,20 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     absurd: {
-      task: {
+      css: {
         src: __dirname + "/tests/absurd/index.js",
-        dest: './tests/css/styles.css'
-      }      
+        dest: __dirname + '/tests/css/styles.css',
+        options: {
+          minify: true
+        }
+      },
+      html: {
+        src: __dirname + "/tests/absurd/html.index.js",
+        dest: __dirname + '/tests/html/code.html',
+        options: {
+          morph: "html"
+        }
+      }    
     },
 
     jshint: {
