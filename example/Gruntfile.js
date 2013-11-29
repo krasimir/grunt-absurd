@@ -13,7 +13,8 @@ module.exports = function(grunt) {
 				src: __dirname + "/html/absurd/index.js",
 				dest: __dirname + '/html/page.html',
 				options: {
-					morph: "html"
+					morph: "html",
+					minify: true
 				}
 			}
 		},
