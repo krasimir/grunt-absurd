@@ -1,7 +1,7 @@
 {
   "name": "grunt-absurd",
   "description": "Grunt plugin for AbsurdJS",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/krasimir/grunt-absurd.git",
   "author": {
     "name": "Krasimir Tsonev",

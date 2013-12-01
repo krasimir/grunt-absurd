@@ -57,7 +57,17 @@ module.exports = function(grunt) {
         options: {
           morph: "html"
         }
-      } 
+      },
+      component: {
+        src: __dirname + "/tests/data/absurd/component.index.js",
+        dest: {
+          css: __dirname + '/tests/data/result/component.css',
+          html: __dirname + '/tests/data/result/component.html'
+        },
+        options: {
+          morph: "component"
+        }
+      }
     },
     watch: {
       css: {

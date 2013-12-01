@@ -26,14 +26,19 @@ module.exports = function(grunt) {
 
         var api = Absurd();
         var options = this.data.options || {};
-        if(options.morph && options.morph === "html") {
-            api.morph("html");
+        if(options.morph) {
+            api.morph(options.morph);
         }
-        api.import(this.data.src).compile(function(err, css) {
+        api.import(this.data.src).compile(function(err, A, B) {
             if(err) {
                 grunt.log.error("Absurd:" + err);
             } else {
-                grunt.file.write(self.data.dest, css, {});
+                if(options.morph === "component") {
+                    grunt.file.write(self.data.dest.css, A, {});
+                    grunt.file.write(self.data.dest.html, B, {});
+                } else {
+                    grunt.file.write(self.data.dest, A, {});
+                }
             }
         }, options);
 
