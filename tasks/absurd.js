@@ -16,20 +16,15 @@ module.exports = function(grunt) {
 
         var self = this;
 
-        if(typeof this.data.src === 'undefined') {
-            grunt.log.error("Absurd: missing 'src'.");
-            return;
-        } else if(typeof this.data.dest === 'undefined') {
-            grunt.log.error("Absurd: missing 'dest'.");
-            return;
-        }
-
-        var api = Absurd();
-        var options = this.data.options || {};
+        var files = grunt.file.expand(this.data.src);
+        var api = Absurd(), f, options = this.data.options || {};
         if(options.morph) {
             api.morph(options.morph);
         }
-        api.import(this.data.src).compile(function(err, A, B) {
+        for(var i=0; i<files.length, f=files[i]; i++) {
+            api.import(f);
+        }
+        api.compile(function(err, A, B) {
             if(err) {
                 grunt.log.error("Absurd:" + err);
             } else {

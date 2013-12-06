@@ -5,29 +5,29 @@ module.exports = function(grunt) {
 
     absurd: {
       css: {
-        src: __dirname + "/tests/data/absurd/index.js",
-        dest: __dirname + '/tests/data/result/styles.css',
+        src: [__dirname + "/tests/data/css/**/*.js"],
+        dest: __dirname + '/tests/styles.css',
         options: {
-          minify: true
+          minify: false
         }
       },
       html: {
-        src: __dirname + "/tests/data/absurd/html.index.js",
-        dest: __dirname + '/tests/data/result/code.html',
+        src: __dirname + "/tests/data/html/page.js",
+        dest: __dirname + "/tests/page.html",
         options: {
           morph: "html"
         }
       },
       component: {
-        src: __dirname + "/tests/data/absurd/component.index.js",
+        src: __dirname + "/tests/data/component/**/*.js",
         dest: {
-          css: __dirname + '/tests/data/result/component.css',
-          html: __dirname + '/tests/data/result/component.html'
+          css: __dirname + "/tests/component.css",
+          html: __dirname + "/tests/component.html"
         },
         options: {
           morph: "component"
         }
-      }    
+      }
     },
 
     jshint: {
