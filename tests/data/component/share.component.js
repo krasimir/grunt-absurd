@@ -4,7 +4,8 @@ module.exports = function(api) {
 			'.share': {
 				p: {
 					lineHeight: "20px",
-					margin: 0
+					margin: 0,
+          'my-custom-gradient': ['red','yellow', 'blue']
 				}
 			}
 		},

@@ -1,0 +1,5 @@
+.share p {
+  line-height: 20px;
+  margin: 0;
+  background: linear-gradient(to bottom, red, yellow, blue);
+}
