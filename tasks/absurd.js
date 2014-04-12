@@ -10,7 +10,6 @@
 
 module.exports = function(grunt) {
   var path = require('path'),
-      glob = require('glob'),
       chalk = require('chalk'), 
       Absurd = require('absurd'),
       api;
