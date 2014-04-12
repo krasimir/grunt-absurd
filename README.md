@@ -30,60 +30,129 @@ grunt.initConfig({
       dest: 'path to your .css file',
       options: {
         minify: true,
-        morph: "html"
       }
     }
   },
 })
 ```
 
+### Options
+
+#### require
+
+Type: `Array`
+Default: `[]`
+
+A list of files loaded before process the src files. 
+
+#### extCSS
+
+Type: `String`
+Default: `'.css'`
+
+The css file extension used in the output of `morph: "component"`
+
+#### extHTML
+
+Type: `String`
+Default: `'.html'`
+
+The html file extension used in the output of `morph: "component"`
+
+#### Other Absurd Options
+
+##### morph
+
+Type: `null | 'html' | 'component'`
+Default: `null`
+
+##### combineSelectors
+
+Type: `Boolean`
+Default: `true`
+
+##### minify
+
+Type: `Boolean`
+Default: `false`
+
+##### keepCamelCase
+
+Type: `Boolean`
+Default: `false`
+
 ### Usage example
 
 ```js
-module.exports = function(grunt) {
-
+...
   grunt.initConfig({
+    testSrc: 'tests/data',
+    testResult: 'tests/results',
+
     absurd: {
-      css: {
-        src: __dirname + "/tests/absurd/index.js",
-        dest: __dirname + '/tests/css/styles.css',
+      buildCSS: {
         options: {
-          minify: true
-        }
-      },
-      html: {
-        src: __dirname + "/tests/absurd/html.index.js",
-        dest: __dirname + '/tests/html/code.html',
-        options: {
-          morph: "html"
-        }
-      },
-      component: {
-        src: __dirname + "/tests/data/absurd/component.index.js",
-        dest: {
-          css: __dirname + '/tests/data/result/component.css',
-          html: __dirname + '/tests/data/result/component.html'
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false,
+          combineSelectors: false,
+          keepCamelCase: true
         },
+        expand: true,
+        cwd: '<%= testSrc %>',
+        src: ['**/*.css.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd.css'
+      },
+      compileCSS: {
         options: {
-          morph: "component"
-        }
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false
+        },
+        src: ['<%= testSrc %>/**/*.css.js'],
+        dest: '<%= testResult %>/compiledCSS.css',
+      },
+      buildHTML: {
+        options: {
+          minify: false,
+          morph: 'html'
+        },
+        expand: true,
+        cwd: '<%= testSrc %>/',
+        src: ['**/*.html.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd.html'
+      },
+      compileHTML: {
+        options: {
+          minify: true,
+          morph: 'html'
+        },
+        src: ['<%= testSrc %>/**/*.html.js'],
+        dest: '<%= testResult %>/compiledHTML.html',
+      },
+      buildComponent: {
+        options: {
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false,
+          morph: 'component'
+        },
+        expand: true,
+        cwd: '<%= testSrc %>/',
+        src: ['**/*.component.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd'
+      },
+      compileComponent: {
+        options: {
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: true,
+          morph: 'component'
+        },
+        src: ['<%= testSrc %>/**/*.component.js'],
+        dest: '<%= testResult %>/compileComponent.absurd'
       }
     },
-    watch: {
-      css: {
-        files: ['css/absurd/**/*.js'],
-        tasks: ['absurd']
-      }
-    }
-  });
-
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-absurd');
-
-  // grunt.registerTask('default', ['concat', 'less']);
-  grunt.registerTask('default', ['absurd', 'watch']);
-
-}
+...
 ```
 
-In this example grunt watches for changes of your .js files and notify AbsurdJS. It later compiles the files to CSS and HTML.
+Use [dynamic_mappings](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically) to create separate output files. use `static_mappings` to create single output file. 

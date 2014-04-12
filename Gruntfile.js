@@ -1,32 +1,72 @@
 module.exports = function(grunt) {
-
   // Project configuration.
   grunt.initConfig({
+    testSrc: 'tests/data',
+    testResult: 'tests/results',
+
+    clean: ['<%= testResult %>'],
 
     absurd: {
-      css: {
-        src: [__dirname + "/tests/data/css/**/*.js"],
-        dest: __dirname + '/tests/styles.css',
+      buildCSS: {
         options: {
-          minify: false
-        }
-      },
-      html: {
-        src: __dirname + "/tests/data/html/page.js",
-        dest: __dirname + "/tests/page.html",
-        options: {
-          morph: "html"
-        }
-      },
-      component: {
-        src: __dirname + "/tests/data/component/**/*.js",
-        dest: {
-          css: __dirname + "/tests/component.css",
-          html: __dirname + "/tests/component.html"
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false,
+          combineSelectors: false,
+          keepCamelCase: true
         },
+        expand: true,
+        cwd: '<%= testSrc %>',
+        src: ['**/*.css.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd.css'
+      },
+      compileCSS: {
         options: {
-          morph: "component"
-        }
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false
+        },
+        src: ['<%= testSrc %>/**/*.css.js'],
+        dest: '<%= testResult %>/compiledCSS.css',
+      },
+      buildHTML: {
+        options: {
+          minify: false,
+          morph: 'html'
+        },
+        expand: true,
+        cwd: '<%= testSrc %>/',
+        src: ['**/*.html.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd.html'
+      },
+      compileHTML: {
+        options: {
+          minify: true,
+          morph: 'html'
+        },
+        src: ['<%= testSrc %>/**/*.html.js'],
+        dest: '<%= testResult %>/compiledHTML.html',
+      },
+      buildComponent: {
+        options: {
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: false,
+          morph: 'component'
+        },
+        expand: true,
+        cwd: '<%= testSrc %>/',
+        src: ['**/*.component.js'],
+        dest: '<%= testResult %>',
+        ext: '.absurd'
+      },
+      compileComponent: {
+        options: {
+          require: ['<%= testSrc %>/**/*.plugin.js'],
+          minify: true,
+          morph: 'component'
+        },
+        src: ['<%= testSrc %>/**/*.component.js'],
+        dest: '<%= testResult %>/compileComponent.absurd'
       }
     },
 
@@ -46,7 +86,7 @@ module.exports = function(grunt) {
         globals: {}
       },
 
-      files: ['grunt.js', 'tasks/**/*.js']
+      files: ['Gruntfile.js', 'tasks/**/*.js']
     }
   });
 
@@ -54,7 +94,8 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'absurd']);
+  grunt.registerTask('default', ['jshint', 'clean', 'absurd']);
 };

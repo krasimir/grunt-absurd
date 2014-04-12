@@ -30,13 +30,15 @@
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "^0.5.0"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
   },
-  "dependencies": { 
-    "absurd": "*"
+  "dependencies": {
+    "absurd": "*",
+    "chalk": "^0.4.0"
   },
   "keywords": [
     "gruntplugin",
