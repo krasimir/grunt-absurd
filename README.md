@@ -48,14 +48,14 @@ A list of files loaded before process the src files.
 #### extCSS
 
 Type: `String`
-Default: `.css`
+Default: `'.css'`
 
 The css file extension used in the output of `morph: "component"`
 
 #### extHTML
 
 Type: `String`
-Default: `.html`
+Default: `'.html'`
 
 The html file extension used in the output of `morph: "component"`
 
@@ -79,7 +79,7 @@ Default: `false`
 ##### keepCamelCase
 
 Type: `Boolean`
-DefaultL `false`
+Default: `false`
 
 ### Usage example
 
